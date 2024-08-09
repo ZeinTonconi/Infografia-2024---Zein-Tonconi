@@ -3,7 +3,7 @@ from bresenham import get_line
 
 # definicion de constantes
 SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 800
+SCREEN_HEIGHT = 600
 SCREEN_TITLE = "Lineas con bresenham"
 
 
@@ -16,10 +16,10 @@ class BresenhamWindow(arcade.Window):
 
     def on_draw(self):
         arcade.start_render()
-        x0 = 3
-        y0 = 2
-        x1 = 15
-        y1 = 7
+        x0 = 20
+        y0 = 6
+        x1 = 3
+        y1 = 5
         points = get_line(x0, y0, x1, y1)
         self.draw_grid()
         self.draw_line_points(points, arcade.color.DARK_YELLOW)
