@@ -11,16 +11,17 @@ class BresenhamWindow(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
         arcade.set_background_color(arcade.color.BLACK)
-        self.pixel_size = 5
-        self.xc = 80
-        self.yc = 20
-        self.r = 20
+        self.pixel_size = 10
+        self.xc = 40
+        self.yc = 40
+        self.r = 15
         self.circle_color = arcade.color.RED_DEVIL
 
         self.speed = 25
         self.velocity = [self.speed, self.speed]
 
     def on_update(self, delta_time: float):
+        # pass
         self.xc += delta_time * self.velocity[0]
         self.yc += delta_time * self.velocity[1]
 
@@ -57,7 +58,8 @@ class BresenhamWindow(arcade.Window):
                 0, 
                 v_l + self.pixel_size / 2, 
                 SCREEN_HEIGHT, 
-                [20, 20, 20]
+                [50, 50, 50],
+                2
             )
 
         for h_l in range(0, SCREEN_HEIGHT, self.pixel_size):
@@ -66,7 +68,8 @@ class BresenhamWindow(arcade.Window):
                 h_l + self.pixel_size / 2, 
                 SCREEN_WIDTH, 
                 h_l + self.pixel_size / 2, 
-                [20, 20, 20]
+                [50, 50, 50],
+                2
             )
 
     def draw_circle_points(self, points,  color):
