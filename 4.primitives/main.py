@@ -1,5 +1,10 @@
 import arcade
-from bresenham import get_line, get_circle
+import arcade.color
+import arcade.color
+import arcade.color
+import arcade.color
+import arcade.color
+from bresenham import get_line, get_circle, getRectangle, getTriangle, getPentagon
 
 # definicion de constantes
 SCREEN_WIDTH = 800
@@ -50,14 +55,32 @@ class BresenhamWindow(arcade.Window):
             self.x1, self.y1
         )
         self.draw_grid()
-        self.draw_circle_points(points, arcade.color.DARK_YELLOW)
-        self.draw_scaled_circle(
-            self.xc,
-            self.yc,
-            self.r
-        )
-        self.draw_line_points(line_points, arcade.color.ALICE_BLUE)
-        self.draw_pentagon(0, 0, 5)
+
+        self.draw_scaled_circle(35,35,8)
+        self.draw_scaled_circle(41,35,8)
+        self.draw_scaled_circle(41,41,8)
+        self.draw_scaled_circle(35,41,8)
+
+    
+        self.draw_pentagon(35,35,7,arcade.color.BLUE_SAPPHIRE)
+        self.draw_pentagon(41,35,7,arcade.color.BLUE_SAPPHIRE)
+        self.draw_pentagon(41,41,7,arcade.color.BLUE_SAPPHIRE)
+        self.draw_pentagon(35,41,7,arcade.color.BLUE_SAPPHIRE)
+
+        self.draw_rectangle(37,33,2,2,arcade.color.AERO_BLUE)
+        self.draw_rectangle(41,37,2,2,arcade.color.AERO_BLUE)
+        self.draw_rectangle(37,41,2,2,arcade.color.AERO_BLUE)
+        self.draw_rectangle(33,37,2,2,arcade.color.AERO_BLUE)
+
+
+        for i in range(4):
+            self.draw_rectangle(35+i,35+i,6-2*i,6-2*i,arcade.color.YELLOW_ROSE)
+
+        
+        self.draw_triangle(34,17,8,10,arcade.color.GREEN)
+
+
+        
 
     def draw_grid(self):
         # lineas verticales
@@ -108,12 +131,24 @@ class BresenhamWindow(arcade.Window):
 
     # ejemplo base de implementacion
     def draw_pentagon(self, xc, yc, r, color):
-        # obtener vertices
-        # obtener bordes entre vertices
-        points = get_line(0,0,0,0)
-        # dibujar figura
+        points = getPentagon(xc,yc,r)
+        self.draw_line_points(points,color)
+
+    def draw_rectangle(self,x0,y0,width,height,color):
+        points = getRectangle(x0,y0,width, height)
+        self.draw_line_points(points, color)
+
+    def draw_triangle(self,x0,y0,widht,height,color):
+        points = getTriangle(x0,y0,widht,height)
         self.draw_line_points(points, color)
 
 if __name__ == "__main__":
     app = BresenhamWindow()
     arcade.run()
+
+    # eduardo.laruta+tareas@gmail.com
+    # subject: primitivas
+    # content: codigo - nombre
+    # link de repo
+    
+    # Fecha entrega: 12 de agosto 8:00 pm
