@@ -34,7 +34,7 @@ class MyWindow(arcade.Window):
         arcade.draw_lrtb_rectangle_filled(
             0, SCREEN_WIDTH,
             SCREEN_HEIGHT, SCREEN_HEIGHT // 2,
-            arcade.color.ORANGE_RED
+            arcade.color.YELLOW_ORANGE
         )   
 
     def draw_sun(self):
@@ -46,8 +46,8 @@ class MyWindow(arcade.Window):
             0, 180
         )
         # rayos
-        self.draw_rays(0, 180, 120, 50, 10, arcade.color.ANDROID_GREEN, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
-        self.draw_rays(0, 180, 180, 90, 7, arcade.color.ANDROID_GREEN, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        self.draw_rays(0, 180, 120, 50, 10, arcade.color.YELLOW_ROSE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
+        self.draw_rays(0, 180, 180, 90, 7, arcade.color.YELLOW_ROSE, SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)
 
     def draw_rays(self, start_angle, end_angle, d, t, num_rays, color, offset_x=0, offset_y=0):
         angle_step = (end_angle - start_angle) // num_rays
