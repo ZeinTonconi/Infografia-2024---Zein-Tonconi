@@ -78,6 +78,7 @@ class Polygon2D:
     def draw(self):
         arcade.draw_polygon_outline(self.vertices, self.color, 5)
 
+
 class Tank:
     def __init__(self, x, y, color):
         self.x = x
@@ -86,25 +87,65 @@ class Tank:
         self.angular_speed = 0
         self.theta = 0
         self.body = Polygon2D(
-            [
-                (100 + x, y),
-                (x, 50 + y),
-                (x, -50 + y),
-            ],
+            [(100 + x, y), (x, 50 +y), (x, -50 + y)],
             color
         )
+        self.bullets = []
+        self.SPEED = 50
 
     def update(self, delta_time: float):
         dtheta = self.angular_speed * delta_time
         dx = self.speed * math.cos(self.theta) * delta_time
         dy = self.speed * math.sin(self.theta) * delta_time
 
-        self.body.translate(dx,dy)
-        self.body.rotate(dtheta, pivot=(self.x,self.y))
+        # apply transforms
+        self.body.translate(dx, dy)
+        self.body.rotate(dtheta, pivot=(self.x, self.y))
 
+        # update tank state
         self.theta += dtheta
         self.x += dx
         self.y += dy
 
+        for bullet in self.bullets:
+            bullet.update(delta_time)
+
     def draw(self):
         self.body.draw()
+        for bullet in self.bullets:
+            bullet.draw()
+
+    def fire(self):
+        self.bullets.append(Bullet(
+            self.x,
+            self.y,
+            self.theta,
+            self.SPEED,
+            arcade.color.RED_DEVIL
+        ))
+
+
+class Bullet:
+
+    def __init__(self,x,y,angle, speed, color):
+        self.x = x
+        self.y = y
+        self.angle = angle
+        self.speed = speed
+        self.body = Polygon2D(
+            [(x, y), (x+10, y), (x+10, y+10), (x, y+10)],
+            color
+        )
+        self.body.rotate(angle)
+
+    def draw(self):
+        self.body.draw()
+    
+    def update(self, delta_time: float):
+        dx = self.speed * math.cos(self.angle) * delta_time
+        dy = self.speed * math.sin(self.angle) * delta_time
+
+        self.body.translate(dx, dy)
+
+        self.x += dx
+        self.y += dy

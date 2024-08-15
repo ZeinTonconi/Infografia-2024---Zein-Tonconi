@@ -15,6 +15,13 @@ def get_random_color():
         random.randint(0,255),
     )
 
+def get_random_color():
+    return (
+        random.randint(0, 255),
+        random.randint(0, 255),
+        random.randint(0, 255),
+    )
+
 class App(arcade.Window):
     def __init__(self):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
@@ -43,6 +50,8 @@ class App(arcade.Window):
                     color=get_random_color(),
                 )
             )
+            print(f"objetos: {len(self.objects)}")
+        
 
     def on_draw(self):
         arcade.start_render()
