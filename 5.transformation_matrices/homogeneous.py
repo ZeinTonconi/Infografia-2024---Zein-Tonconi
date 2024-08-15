@@ -14,9 +14,23 @@ class MyWindow(arcade.Window):
         super().__init__(SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TITLE)
         arcade.set_background_color(arcade.color.BLACK)
         self.vertices = [(100, 100), (100, 200), (200, 200), (200, 100)]
+        self.center = 100
+        self.f_height = 100
         
+
     def on_update(self, delta_time: float):
-        pass
+
+        # vertex_origin = self.translate(self.vertices, -self.center, 0)
+        # self.vertices = [ (x*delta_time,np.sin(x*delta_time)) for (x,y) in vertex_origin]
+        # self.vertices = self.translate(self.vertices, self.center, 0)
+        
+        # self.vertices = [ (20*delta_time + x, y) for (x,y) in self.vertices]
+
+        self.vertices = self.translate(self.vertices, 0, -self.center)
+        self.vertices = [ (20*delta_time + x, np.sin(x/100)*self.f_height + self.center + y) for(x,y) in self.vertices]
+        self.vertices = self.translate(self.vertices, 0, self.center)
+        
+        # pass
         # print(delta_time)
         # self.vertices = self.rotate(self.vertices, 10 * delta_time, 200, 200)
         # self.vertices = self.translate(self.vertices, 10 * delta_time, 10 * delta_time)
@@ -24,9 +38,6 @@ class MyWindow(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         self.draw_shape(self.vertices)
-        # print(self.vertices, self.get_center(self.vertices))
-        new = self.scale(self.vertices, 2.5)
-        self.draw_shape(new)
 
     def translate(self, vertices, dx, dy):
         TM = np.array([[1, 0, dx], [0, 1, dy], [0, 0, 1]])
