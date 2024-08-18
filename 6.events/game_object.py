@@ -91,6 +91,52 @@ class Tank:
             color
         )
         self.bullets = []
+    
+    def shoot(self, bullet_speed):
+        self.bullets.append((self.x, self.y, self.theta, bullet_speed))
+
+    def update(self, delta_time: float):
+        dtheta = self.angular_speed * delta_time
+        dx = self.speed * math.cos(self.theta) * delta_time
+        dy = self.speed * math.sin(self.theta) * delta_time
+
+        # apply transforms
+        self.body.translate(dx, dy)
+        self.body.rotate(dtheta, pivot=(self.x, self.y))
+
+        # update tank state
+        self.theta += dtheta
+        self.x += dx
+        self.y += dy
+
+        self.update_bullets(delta_time)
+
+    def update_bullets(self, delta_time):
+        for i, (x, y, theta, speed) in enumerate(self.bullets):
+            new_x = x + speed * math.cos(theta) * delta_time
+            new_y = y + speed * math.sin(theta) * delta_time
+
+            self.bullets[i] = (new_x, new_y, theta, speed)
+
+    def draw(self):
+        self.body.draw()
+
+        for x, y, theta, speed in self.bullets:
+            arcade.draw_point(x, y, arcade.color.RED, 7)
+
+
+class Tank:
+    def __init__(self, x, y, color):
+        self.x = x
+        self.y = y
+        self.speed = 0
+        self.angular_speed = 0
+        self.theta = 0
+        self.body = Polygon2D(
+            [(100 + x, y), (x, 50 +y), (x, -50 + y)],
+            color
+        )
+        self.bullets = []
         self.SPEED = 50
 
     def update(self, delta_time: float):

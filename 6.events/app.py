@@ -15,12 +15,6 @@ def get_random_color():
         random.randint(0,255),
     )
 
-def get_random_color():
-    return (
-        random.randint(0, 255),
-        random.randint(0, 255),
-        random.randint(0, 255),
-    )
 
 class App(arcade.Window):
     def __init__(self):
@@ -31,13 +25,12 @@ class App(arcade.Window):
     def on_key_release(self, symbol: int, modifiers: int):
         if symbol == arcade.key.UP:
             for obj in self.objects:
-                obj.scale(1.1,1.1)
+                obj.scale(1.1, 1.1)
         elif symbol == arcade.key.DOWN:
             for obj in self.objects:
-                obj.scale(0.9,0.9)
-        
-    def on_mouse_release(self, x: int, y:int, button: int, modifiers: int):
-        print(f"{x,y}")
+                obj.scale(0.9, 0.9)
+
+    def on_mouse_release(self, x, y, button, modifiers):
         if button == arcade.MOUSE_BUTTON_LEFT:
             self.objects.append(
                 Polygon2D(
