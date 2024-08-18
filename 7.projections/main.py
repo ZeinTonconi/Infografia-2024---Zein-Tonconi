@@ -43,7 +43,7 @@ class App(arcade.Window):
         # self.cube.rotate(0.1, "x")
         # self.cube.rotate(2, "y")
         # self.cube.rotate(0.1, "z")
-        self.mouse_vector = np.array([0.0,0.0,1.0])
+        self.mouse_vector = np.array([600.0,600.0,100.0])
         
     
   
@@ -51,6 +51,7 @@ class App(arcade.Window):
     def on_mouse_motion(self, x: int, y: int, dx: int, dy: int):
         self.mouse_vector[0] = x
         self.mouse_vector[1] = y
+        pass
 
     def on_update(self, delta_time: float):
         

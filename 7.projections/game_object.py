@@ -8,7 +8,7 @@ class Object3D:
         self.edges = edges
         self.color = color
         self.points_2d = None
-        self.center_vector = np.array([0.0,0.0,1.0])
+        self.center_vector = np.array([0.0,0.0,100.0])
 
         self.angle_X = 0
         self.angle_Y = 0
@@ -140,22 +140,23 @@ class Object3D:
         return angle
     
     def follow_mouse(self, mouse, delta_time):
-        diff_vector = delta_time*(mouse - self.center_vector)
+        diff_vector = delta_time*( mouse - self.center_vector)
         self.center_vector += diff_vector
 
-        # self.rotate(-self.angle_X, "x")
-        self.rotate(-self.angle_Y, "Y")
+        self.rotate(-self.angle_X, "y")
+        self.rotate(-self.angle_Y, "x")
 
-        hipo = np.linalg.norm(self.center_vector)
+        hipo_Y = np.sqrt(self.center_vector[0] ** 2 + self.center_vector[2] ** 2)
+        hipo_X = np.sqrt(self.center_vector[1] ** 2 + self.center_vector[2] ** 2)
 
-        theta_Y = np.acos(max(-1,min(1,self.center_vector[1]/hipo)))
-        theta_X = np.acos(max(-1,min(1,self.center_vector[0]/hipo)))
+        theta_Y = np.acos(max(-1,min(1,self.center_vector[1]/hipo_Y)))
+        theta_X = np.acos(max(-1,min(1,self.center_vector[0]/hipo_X)))
 
         print(f"center: {self.center_vector}, mouse: {mouse}, diff_vector: {diff_vector} theta_X: {theta_X}")
-        self.rotate(theta_Y, "y")
-        # self.rotate(theta_X, "x")
+        self.rotate(theta_Y, "x")
+        self.rotate(theta_X, "y")
 
-        self.angle_x = theta_X 
+        self.angle_X = theta_X 
         self.angle_Y = theta_Y       
 
 
