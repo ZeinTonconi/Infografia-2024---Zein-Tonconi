@@ -8,10 +8,10 @@ class Object3D:
         self.edges = edges
         self.color = color
         self.points_2d = None
-        self.center_vector = np.array([0.0,0.0,100.0])
 
         self.angle_X = 0
         self.angle_Y = 0
+        self.facing = np.array([400,400])
 
     def translate(self, dx, dy, dz):
         TM = np.array([
@@ -138,26 +138,31 @@ class Object3D:
 
         angle = np.arccos(cos_theta)
         return angle
-    
+
+    def unit_vector(self,a):
+        a = np.array(a)
+        norm = np.linalg.norm(a)
+        return a/norm
+
     def follow_mouse(self, mouse, delta_time):
-        diff_vector = delta_time*( mouse - self.center_vector)
-        self.center_vector += diff_vector
 
-        self.rotate(-self.angle_X, "y")
-        self.rotate(-self.angle_Y, "x")
+        unit_mouse = self.unit_vector([mouse[0]-400, -200])
+        unit_facing = self.unit_vector([self.facing[0]-400, -200])
 
-        hipo_Y = np.sqrt(self.center_vector[0] ** 2 + self.center_vector[2] ** 2)
-        hipo_X = np.sqrt(self.center_vector[1] ** 2 + self.center_vector[2] ** 2)
+        theta_Y = np.atan2(unit_mouse[0], unit_mouse[1]) - np.atan2(unit_facing[0], unit_facing[1])
 
-        theta_Y = np.acos(max(-1,min(1,self.center_vector[1]/hipo_Y)))
-        theta_X = np.acos(max(-1,min(1,self.center_vector[0]/hipo_X)))
+        self.facing[0]=mouse[0]
 
-        print(f"center: {self.center_vector}, mouse: {mouse}, diff_vector: {diff_vector} theta_X: {theta_X}")
-        self.rotate(theta_Y, "x")
-        self.rotate(theta_X, "y")
+        unit_mouse = self.unit_vector([-200, mouse[1]-400])
+        unit_facing = self.unit_vector([-200, self.facing[1]-400])
 
-        self.angle_X = theta_X 
-        self.angle_Y = theta_Y       
+        theta_X = np.atan2(unit_mouse[0], unit_mouse[1]) - np.atan2(unit_facing[0], unit_facing[1])
+
+        self.facing[0]=mouse[0]
+        self.facing[1]=mouse[1]
+
+        self.rotate(theta_Y, "y") 
+        self.rotate(theta_X,"x")  
 
 
 if __name__ == "__main__":
