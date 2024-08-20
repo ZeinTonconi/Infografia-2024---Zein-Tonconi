@@ -36,11 +36,23 @@ class Car:
         r_wheel_shape.elasticity = 1
         self.r_wheel_sprite = arcade.SpriteCircle(20, arcade.color.GREEN)
 
+        # joints
+        f_joint = pymunk.PinJoint(chassis_body, f_wheel_body, (x + 50, y - 35), (0, 0))
+        f_joint.collide_bodies = False
+        f_motor = pymunk.SimpleMotor(chassis_body, f_wheel_body, 10)
+
+        r_joint = pymunk.PinJoint(chassis_body, r_wheel_body, (x - 50, y - 35), (0, 0))
+        r_joint.collide_bodies = False
+        r_motor = pymunk.SimpleMotor(chassis_body, r_wheel_body, 10)
 
         space.add(chassis_body, chassis_shape)
         space.add(f_wheel_body, f_wheel_shape)
         space.add(r_wheel_body, r_wheel_shape)
-        
+        space.add(f_joint)
+        space.add(f_motor)
+        space.add(r_joint)
+        space.add(r_motor)
+
         self.chassis_sprite = arcade.SpriteSolidColor(100, 70, arcade.color.RED)
 
         self.sprites = arcade.SpriteList()
@@ -102,6 +114,8 @@ class App(arcade.Window):
     def add_static(self):
         # agregar piso
         self.add_static_segment(0, 0, WIDTH, 0)
+        self.add_static_segment(WIDTH, 0, WIDTH, HEIGHT)
+        
 
 
 
