@@ -1,12 +1,14 @@
 import arcade
 import math
+import arcade.color
 import pymunk
 from game_object import Box
 
 WIDTH = 800
-HEIGHT = 800
+HEIGHT = 600
 TITLE = "boxes"
-
+DAMPING = 500
+STIFFNESS = 500.0
 class Car:
     def __init__(self, x, y, space):
         # body
@@ -37,11 +39,11 @@ class Car:
         self.r_wheel_sprite = arcade.SpriteCircle(20, arcade.color.GREEN)
 
         # joints
-        f_joint = pymunk.PinJoint(chassis_body, f_wheel_body, (x + 50, y - 35), (0, 0))
+        f_joint = pymunk.PinJoint(chassis_body, f_wheel_body, (50, -35), (0, 0))
         f_joint.collide_bodies = False
         f_motor = pymunk.SimpleMotor(chassis_body, f_wheel_body, 10)
 
-        r_joint = pymunk.PinJoint(chassis_body, r_wheel_body, (x - 50, y - 35), (0, 0))
+        r_joint = pymunk.PinJoint(chassis_body, r_wheel_body, (-50, -35), (0, 0))
         r_joint.collide_bodies = False
         r_motor = pymunk.SimpleMotor(chassis_body, r_wheel_body, 10)
 
@@ -88,7 +90,7 @@ class App(arcade.Window):
         self.space = pymunk.Space()
         self.space.gravity = (0, -900)
 
-        self.car = Car(200, 50, self.space)
+        self.car = Car(200, 300, self.space)
         self.lines = []
         self.add_static()
         # sprites
@@ -103,6 +105,8 @@ class App(arcade.Window):
     def on_draw(self):
         arcade.start_render()
         self.sprites.draw()
+        for line in self.lines:
+            arcade.draw_line(line[0],line[1],line[2],line[3], arcade.color.AERO_BLUE)
 
     def add_static_segment(self, x0, y0, x1, y1):
         segment_body = pymunk.Body(body_type=pymunk.Body.STATIC)
@@ -111,10 +115,25 @@ class App(arcade.Window):
         self.space.add(segment_body, segment_shape)
         self.lines.append((x0, y0, x1, y1))
 
+    def add_triangles(self, x, y):
+        points = (0, 0), (100, 0), (50, 25)
+        triangle_body = pymunk.Body(body_type=pymunk.Body.STATIC)
+        triangle_body.position = (x,y)
+        triangle_shape = pymunk.Poly(triangle_body, points)
+        triangle_shape.friction = 0.3
+        self.space.add(triangle_body, triangle_shape)
+        self.lines += [(x,y,x+100,y),
+                          (x+100,y,x+50,y+25),
+                          (x+50,y+25,x,y)]
+
     def add_static(self):
         # agregar piso
         self.add_static_segment(0, 0, WIDTH, 0)
         self.add_static_segment(WIDTH, 0, WIDTH, HEIGHT)
+
+        self.add_triangles(WIDTH//2, 0)
+        self.add_triangles(WIDTH//2+150, 0)
+        
         
 
 
