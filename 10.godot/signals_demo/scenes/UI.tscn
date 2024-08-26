@@ -1,0 +1,65 @@
+[gd_scene load_steps=6 format=3 uid="uid://dkknox3t40ibc"]
+
+[ext_resource type="Script" path="res://scripts/titulo.gd" id="1_01ahf"]
+[ext_resource type="Script" path="res://scripts/ui.gd" id="1_4pqeo"]
+[ext_resource type="Script" path="res://scripts/button.gd" id="1_l77i0"]
+[ext_resource type="Texture2D" uid="uid://dow4cp15nb6h0" path="res://icon.svg" id="4_jsntc"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_400gk"]
+font_size = 35
+font_color = Color(0.346929, 0.688649, 0.143771, 1)
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4pqeo")
+
+[node name="Titulo" type="Label" parent="."]
+layout_mode = 0
+offset_left = 517.0
+offset_top = 116.0
+offset_right = 668.0
+offset_bottom = 165.0
+text = "UI DEMO"
+label_settings = SubResource("LabelSettings_400gk")
+script = ExtResource("1_01ahf")
+
+[node name="Button" type="Button" parent="." node_paths=PackedStringArray("label")]
+layout_mode = 0
+offset_left = 378.0
+offset_top = 304.0
+offset_right = 498.0
+offset_bottom = 335.0
+text = "Presiona AQUI"
+script = ExtResource("1_l77i0")
+label = NodePath("../Titulo")
+
+[node name="Button2" type="Button" parent="."]
+layout_mode = 0
+offset_left = 683.0
+offset_top = 300.0
+offset_right = 794.0
+offset_bottom = 331.0
+text = "tambien aqui"
+
+[node name="Button3" type="Button" parent="."]
+layout_mode = 0
+offset_left = 851.0
+offset_top = 305.0
+offset_right = 962.0
+offset_bottom = 336.0
+text = "Otro boton"
+
+[node name="TextureButton" type="TextureButton" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture_normal = ExtResource("4_jsntc")
+
+[connection signal="button_down" from="Button" to="Button" method="_on_button_down"]
+[connection signal="button_down" from="Button2" to="Titulo" method="_on_button_2_button_down"]
+[connection signal="button_down" from="Button3" to="." method="_on_button_3_button_down"]

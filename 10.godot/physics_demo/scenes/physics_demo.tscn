@@ -1,0 +1,43 @@
+[gd_scene load_steps=5 format=3 uid="uid://fwfwiykxo5iw"]
+
+[ext_resource type="Texture2D" uid="uid://gc2grrb10wqi" path="res://icon.svg" id="1_b44hw"]
+[ext_resource type="PackedScene" uid="uid://cg0wonv867ngd" path="res://scenes/personaje.tscn" id="2_uuybm"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_csnvd"]
+size = Vector2(124, 124)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_244fs"]
+b = Vector2(1207.95, 1)
+
+[node name="PhysicsDemo" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(400, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_b44hw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_csnvd")
+
+[node name="RigidBody2D2" type="RigidBody2D" parent="."]
+position = Vector2(600, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D2"]
+texture = ExtResource("1_b44hw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D2"]
+shape = SubResource("RectangleShape2D_csnvd")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(10.05, 600)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+position = Vector2(593.95, 56)
+scale = Vector2(9.95273, 1)
+texture = ExtResource("1_b44hw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_244fs")
+
+[node name="Personaje" parent="." instance=ExtResource("2_uuybm")]
