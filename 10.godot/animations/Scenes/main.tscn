@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://oake3dloux88"]
+
+[ext_resource type="PackedScene" uid="uid://dbu34kvidtq38" path="res://Scenes/skeleton.tscn" id="1_3gyu0"]
+[ext_resource type="PackedScene" uid="uid://diwhet37ietas" path="res://Scenes/knight.tscn" id="2_20gww"]
+[ext_resource type="PackedScene" uid="uid://bt1v4u38oiad7" path="res://Scenes/spine_sattic.tscn" id="3_lrrn3"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Skeleton" parent="." instance=ExtResource("1_3gyu0")]
+position = Vector2(291, -26)
+
+[node name="Knight" parent="." instance=ExtResource("2_20gww")]
+position = Vector2(25, 57)
+
+[node name="SpineSattic" parent="." instance=ExtResource("3_lrrn3")]
+position = Vector2(691, 202)
+collision_layer = 4
+collision_mask = 3

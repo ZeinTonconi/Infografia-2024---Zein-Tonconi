@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://6ok6xyopghnc"]
+
+[ext_resource type="Texture2D" uid="uid://bnitmw8i0wdwb" path="res://icon.svg" id="1_xsm3c"]
+[ext_resource type="PackedScene" uid="uid://b0gyugcywyv2x" path="res://scenes/character.tscn" id="2_4vhvd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_paccr"]
+size = Vector2(124, 124)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_5to8y"]
+a = Vector2(800, 10)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+position = Vector2(500, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RigidBody2D"]
+texture = ExtResource("1_xsm3c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RigidBody2D"]
+shape = SubResource("RectangleShape2D_paccr")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(0, 600)
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D"]
+texture = ExtResource("1_xsm3c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("SegmentShape2D_5to8y")
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_4vhvd")]
+position = Vector2(0, 300)
