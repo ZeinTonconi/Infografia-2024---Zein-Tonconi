@@ -122,7 +122,7 @@ position = Vector2(0, 5)
 shape = SubResource("RectangleShape2D_ycp03")
 
 [node name="Health" parent="." instance=ExtResource("3_wp3it")]
-max_health = 20
+max_health = 30
 
 [connection signal="area_entered" from="HurtBox" to="Health" method="_on_hurt_box_area_entered"]
 [connection signal="health_depleted" from="Health" to="." method="_on_health_health_depleted"]

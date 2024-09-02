@@ -1369,7 +1369,7 @@ states/Idle/position = Vector2(483, 135)
 states/Pick/node = SubResource("AnimationNodeBlendSpace2D_4tkah")
 states/Pick/position = Vector2(392, 260)
 states/Run/node = SubResource("AnimationNodeBlendSpace2D_5r6bn")
-states/Run/position = Vector2(482, 48)
+states/Run/position = Vector2(371.5, 36)
 transitions = ["Idle", "Axe", SubResource("AnimationNodeStateMachineTransition_e3l1l"), "Idle", "Pick", SubResource("AnimationNodeStateMachineTransition_keks0"), "Axe", "Idle", SubResource("AnimationNodeStateMachineTransition_cbeod"), "Pick", "Idle", SubResource("AnimationNodeStateMachineTransition_441cy"), "Start", "Idle", SubResource("AnimationNodeStateMachineTransition_dgl02"), "Idle", "Run", SubResource("AnimationNodeStateMachineTransition_rb16a"), "Run", "Idle", SubResource("AnimationNodeStateMachineTransition_mkb0t")]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_1k5iw"]
