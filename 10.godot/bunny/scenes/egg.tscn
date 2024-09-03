@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://c4054y3jhtxw7"]
+[gd_scene load_steps=5 format=3 uid="uid://c4054y3jhtxw7"]
 
 [ext_resource type="Texture2D" uid="uid://jt0c1lqju8ha" path="res://assets/Characters/Egg_And_Nest.png" id="1_i64b3"]
+[ext_resource type="Script" path="res://scripts/egg.gd" id="1_iw06v"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7m21x"]
 radius = 3.0
 height = 8.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_gq7sp"]
+radius = 12.0
+
 [node name="Egg" type="StaticBody2D"]
+collision_layer = 0
+script = ExtResource("1_iw06v")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_i64b3")
@@ -15,3 +21,13 @@ hframes = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1)
 shape = SubResource("CapsuleShape2D_7m21x")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 1)
+shape = SubResource("CircleShape2D_gq7sp")
+debug_color = Color(0.981029, 0.00478598, 0.370571, 0.42)
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

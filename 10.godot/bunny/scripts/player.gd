@@ -4,12 +4,8 @@ extends CharacterBody2D
 @onready var state_machine = $AnimationTree.get("parameters/playback")
 
 var input_vector
-var egg_scene
-
-func _ready() -> void:
-	# precargar escena
-	egg_scene = preload("res://scenes/egg.tscn")
 	
+signal do_put_egg(egg_position)
 
 func set_blend_position(vector):
 	anim_tree.set("parameters/Idle/blend_position", vector)
@@ -28,10 +24,7 @@ func _on_player_control_do_attack() -> void:
 	set_blend_position(input_vector)
 	state_machine.travel("Axe")
 
-
-func _on_player_control_do_put_egg() -> void:
-	# instanciar escena
-	var egg_instance = egg_scene.instantiate()
-	add_child(egg_instance)
-	
-	egg_instance.position = Vector2.ZERO
+func _input(event: InputEvent) -> void:
+	if event is InputEventKey:
+		if event.is_action_pressed("Hatch"):
+			do_put_egg.emit(global_position)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://ddtyv4gwjn615"]
+[gd_scene load_steps=10 format=3 uid="uid://ddtyv4gwjn615"]
 
 [ext_resource type="Texture2D" uid="uid://c4fc2uicw2pp8" path="res://assets/Characters/Free Chicken Sprites.png" id="1_cthqd"]
 [ext_resource type="Script" path="res://scripts/chicken.gd" id="1_hergc"]
@@ -42,6 +42,9 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_l4vbk"]
 radius = 5.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_afey5"]
+radius = 7.0
+
 [node name="Chicken" type="CharacterBody2D"]
 script = ExtResource("1_hergc")
 
@@ -55,3 +58,9 @@ shape = SubResource("CircleShape2D_l4vbk")
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 debug_enabled = true
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_afey5")
+debug_color = Color(1.44392e-07, 0.630825, 0.468555, 0.42)

@@ -1,17 +1,18 @@
-[gd_scene load_steps=4 format=3 uid="uid://btn7c628g1hg7"]
+[gd_scene load_steps=4 format=3 uid="uid://oake3dloux88"]
 
-[ext_resource type="PackedScene" uid="uid://bcwa6t6salnsw" path="res://scenes/skeleton.tscn" id="1_kymr8"]
-[ext_resource type="PackedScene" uid="uid://by41uby6giys3" path="res://scenes/knight.tscn" id="2_y6syu"]
-[ext_resource type="PackedScene" uid="uid://sb51yjd1n308" path="res://scenes/bad_static.tscn" id="3_sgi83"]
+[ext_resource type="PackedScene" uid="uid://dbu34kvidtq38" path="res://Scenes/skeleton.tscn" id="1_3gyu0"]
+[ext_resource type="PackedScene" uid="uid://diwhet37ietas" path="res://Scenes/knight.tscn" id="2_20gww"]
+[ext_resource type="PackedScene" uid="uid://bt1v4u38oiad7" path="res://Scenes/spine_sattic.tscn" id="3_lrrn3"]
 
-[node name="Main" type="Node2D"]
+[node name="Node2D" type="Node2D"]
 
-[node name="Skeleton" parent="." instance=ExtResource("1_kymr8")]
-position = Vector2(516, 95)
-scale = Vector2(4, 4)
+[node name="Skeleton" parent="." instance=ExtResource("1_3gyu0")]
+position = Vector2(291, -26)
 
-[node name="Knight" parent="." instance=ExtResource("2_y6syu")]
-position = Vector2(360, 120)
+[node name="Knight" parent="." instance=ExtResource("2_20gww")]
+position = Vector2(25, 57)
 
-[node name="BadStatic" parent="." instance=ExtResource("3_sgi83")]
-position = Vector2(408, 332)
+[node name="SpineSattic" parent="." instance=ExtResource("3_lrrn3")]
+position = Vector2(691, 202)
+collision_layer = 4
+collision_mask = 3

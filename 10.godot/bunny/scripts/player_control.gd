@@ -5,7 +5,6 @@ class_name PlayerControl
 # signals
 signal do_attack
 signal do_move(input_vector)
-signal do_put_egg
 
 @export var body: CharacterBody2D
 
@@ -62,8 +61,3 @@ func attack_anim_finished():
 
 func _on_timer_timeout() -> void:
 	attack_anim_finished()
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventKey:
-		if event.is_action_pressed("PutEgg"):
-			do_put_egg.emit()
