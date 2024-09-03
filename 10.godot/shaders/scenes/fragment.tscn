@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://2gam5aagg8et"]
+
+[ext_resource type="Shader" path="res://shaders/shine.gdshader" id="1_0dns5"]
+[ext_resource type="Texture2D" uid="uid://dtk57ugehhl6e" path="res://assets/boy.webp" id="1_k07av"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r8onp"]
+shader = ExtResource("1_0dns5")
+
+[node name="Fragment" type="Node2D"]
+
+[node name="BoyCode" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(821, 271)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_k07av")
+
+[node name="Boy" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_r8onp")
+position = Vector2(278, 291)
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_k07av")
+
+[node name="ColorPicker" type="ColorPicker" parent="."]
+offset_left = -458.0
+offset_top = 6.0
+offset_right = -160.0
+offset_bottom = 582.0
+color = Color(0.211521, 0.23888, 0.290166, 1)

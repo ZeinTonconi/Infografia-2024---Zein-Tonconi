@@ -1419,5 +1419,6 @@ disabled = false
 
 [connection signal="do_attack" from="PlayerControl" to="." method="_on_player_control_do_attack"]
 [connection signal="do_move" from="PlayerControl" to="." method="_on_player_control_do_move"]
+[connection signal="do_put_egg" from="PlayerControl" to="." method="_on_player_control_do_put_egg"]
 
 [editable path="Marker2D/HitBox"]
